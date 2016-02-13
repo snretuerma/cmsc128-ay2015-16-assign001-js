@@ -194,8 +194,11 @@ function wordsToNum(words){
 	return(answer);
 }
 
-function wordsToCurrency(currency){
-
+function wordsToCurrency(words,currency){
+		var valid = ["JPY", "PHP", "USD"];
+		var value = wordsToNum(words);
+		output = value + currency;
+		return (output);
 }
 
 function numberDelimited(number, delimiter, jumps){

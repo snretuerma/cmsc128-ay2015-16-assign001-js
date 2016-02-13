@@ -1,7 +1,41 @@
 function numToWords(number){
-	var numberString = number.toString();
+    var values1 = {
+        0: "",
+        1: "one",
+        2: "two",
+        3: "three",
+        4: "four",
+        5: "five",
+        6: "six",
+        7: "seven",
+        8: "eight",
+        9: "nine",
+        10: "ten",
+        11: "eleven",
+        12: "twelve",
+        13: "thirteen",
+        14: "fourteen",
+        15: "fifteen",
+        16: "sixteen",
+        17: "seventeen",
+        18: "eighteen",
+        19: "nineteen"
+
+    };
+
+    var values2 = {
+        2: "twenty",
+        3: "thirty",
+        4: "forty",
+        5: "fifty",
+        6: "sixty",
+        7: "seventy",
+        8: "eighty",
+        9: "ninety"
+    }
+    var numberString = number.toString();
 	var digitCount = numberString.length;
-	var index1 = digitCount;
+    var index1 = digitCount;
 	var index2 = digitCount - 3;
 	var substringArray = [];
 	var word = "";
@@ -18,37 +52,82 @@ function numToWords(number){
 	else{
 		for(var i = 0; i< digitCount; i+=3){
 			var substring = numberString.slice(index2, index1);
-
 			substringArray.push(substring);
-
 			index1 = index2;
 			index2 = index1 - 3;
 		}
 	}
-	var output = "";
-	for(var i = substringArray.length; i > 0; i--){
-		if(i == 5){
-			output += getHundred(substringArray[i-1]) + " trillion ";
-		}
 
-		if(i == 4){
-			output += getHundred(substringArray[i-1]) + " billion ";
-		}
+    var output = "";
+    for(var i = substringArray.length; i > 0; i--){
+        if(i == 3){
+            var word = "";
+            var hundred = Math.floor(substringArray[i-1]/100);
+            if(hundred>0){
+                word+=values1[hundred] + " hundred "
+            }
 
-		if(i == 3){
-			output += getHundred(substringArray[i-1]) + " million ";
-		}
+            var temp = substringArray[i-1]%100;
+            if(temp<20){
+                tens = temp;
+                word+=values1[tens] + " "
+            }
+            else{
+                tens = Math.floor((substringArray[i-1]%100)/10);
+                word+=values2[tens] + " "
+                var ones = Math.floor((substringArray[i-1]%100)%10);
+                word+=values1[ones] + " "
+            }
+            output += word + " million ";
+        }
 
-		if(i == 2){
-			output += getHundred(substringArray[i-1]) + " thousand "
-		}
+        if(i == 2){
+            var word = "";
+            var hundred = Math.floor(substringArray[i-1]/100);
+            if(hundred>0){
+                word+=values1[hundred] + " hundred "
+            }
 
-		if(i == 1){
-			output += getHundred(substringArray[i-1])
-		}
+            var temp = substringArray[i-1]%100;
+            if(temp<20){
+                tens = temp;
+                word+=values1[tens] + " "
+            }
+            else{
+                tens = Math.floor((substringArray[i-1]%100)/10);
+                word+=values2[tens] + " "
+                var ones = Math.floor((substringArray[i-1]%100)%10);
+                word+=values1[ones] + " "
+            }
+            if(substringArray[i-1] != 0){
+                output += word + " thousand "
+            }
 
-	}
-	return(output);
+        }
+
+        if(i == 1){
+            var word = "";
+            var hundred = Math.floor(substringArray[i-1]/100);
+            if(hundred>0){
+                word+=values1[hundred] + " hundred "
+            }
+
+            var temp = substringArray[i-1]%100;
+            if(temp<20){
+                tens = temp;
+                word+=values1[tens] + " "
+            }
+            else{
+                tens = Math.floor((substringArray[i-1]%100)/10);
+                word+=values2[tens] + " "
+                var ones = Math.floor((substringArray[i-1]%100)%10);
+                word+=values1[ones] + " "
+            }
+            output += word
+        }
+
+    }
+    return(output);
 }
 
 function wordsToNum(words){
@@ -84,64 +163,4 @@ function numberDelimited(number, delimiter, jumps){
 		}
 		word = string.slice(0, jumps).concat("", word)
 	}
-}
-
-/********************************************************************************/
-/*********Additional Functions that are called by the required functions*********/
-/********************************************************************************/
-// Called by numToWords
-function getHundred(substring){
-
-	var values1 = {
-		0: "",
-		1: "one",
-		2: "two",
-		3: "three",
-		4: "four",
-		5: "five",
-		6: "six",
-		7: "seven",
-		8: "eight",
-		9: "nine",
-		10: "ten",
-		11: "eleven",
-		12: "twelve",
-		13: "thirteen",
-		14: "fourteen",
-		15: "fifteen",
-		16: "sixteen",
-		17: "seventeen",
-		18: "eighteen",
-		19: "nineteen"
-
-	};
-	var values2 = {
-		2: "twenty",
-		3: "thirty",
-		4: "forty",
-		5: "fifty",
-		6: "sixty",
-		7: "seventy",
-		8: "eighty",
-		9: "ninety"
-	}
-	var word = "";
-	var hundred = Math.floor(substring/100);
-	if(hundred>0){
-		word+=values1[hundred] + " hundred "
-	}
-
-	var temp = substring%100;
-	if(temp<20){
-		tens = temp;
-		word+=values1[tens] + " "
-	}
-	else{
-		tens = Math.floor((substring%100)/10);
-		word+=values2[tens] + " "
-		var ones = Math.floor((substring%100)%10);
-		word+=values1[ones] + " "
-	}
-
-	return (word);
 }

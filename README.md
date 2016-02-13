@@ -5,7 +5,7 @@ Section AB
 Assign 001: Programming a Number Library
 
 A number library using JavaScript that contains 4 functions
-# numToWords
-# wordsToNum
-# wordsToCurrency
-# numberDelimited
+numToWords
+wordsToNum
+wordsToCurrency
+numberDelimited

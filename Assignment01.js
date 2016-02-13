@@ -237,6 +237,7 @@ function numberDelimited(number, delimiter, jumps){
 		}
 		word = string.slice(0, jumps).concat("", word)
 	}
+    return(word); // return the output to the calling function
 }
 
 /*

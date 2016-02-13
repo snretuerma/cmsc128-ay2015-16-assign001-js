@@ -131,7 +131,67 @@ function numToWords(number){
 }
 
 function wordsToNum(words){
+	var valueMap = {
+			"one": 1,
+			"two": 2,
+			"three": 3,
+			"four": 4,
+			"five": 5,
+			"six": 6,
+			"seven": 7,
+			"eight": 8,
+			"nine": 9,
+			"ten": 10,
+			"eleven": 11,
+			"twelve": 12,
+			"thirteen": 13,
+			"fourteen": 14,
+			"fifteen": 15,
+			"sixteen": 16,
+			"seventeen": 17,
+			"eighteen": 18,
+			"nineteen": 19,
+			"twenty": 20,
+			"thirty": 30,
+			"forty": 40,
+			"fifty": 50,
+			"sixty": 60,
+			"seventy": 70,
+			"eighty": 80,
+			"ninety": 90,
+			"hundred": 100,
+			"thousand": 1000,
+			"million": 1000000
+	}
+	var splitresult = " ";
+	output = 0;
+	splitresult = words.split(" ");
+	var numberValue = 0;
+	var oldValue = 0;
+	var temp = 0;
+	var answer = 0;
+	for(var i = 0; i < (splitresult.length); i++){
+		numberValue = valueMap[splitresult[i]];
+		if(oldValue == 0){
+			oldValue = numberValue
 
+		}
+
+		else if(oldValue > numberValue){
+			oldValue = oldValue + numberValue;
+		}
+
+		else{
+			oldValue = oldValue * numberValue;
+		}
+		if(oldValue>=1000){
+			answer = answer + oldValue;
+			oldValue = 0;
+			temp = 0;
+		}
+	}
+	answer = answer+oldValue;
+	return(answer);
 }
 
 function wordsToCurrency(currency){

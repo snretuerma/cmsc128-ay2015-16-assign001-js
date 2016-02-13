@@ -4,8 +4,5 @@ CMSC 128: Introduction to Software Engineering
 Section AB
 Assign 001: Programming a Number Library
 
-A number library using JavaScript that contains 4 functions
-numToWords
-wordsToNum
-wordsToCurrency
-numberDelimited
+A number library using JavaScript that contains 4 functions 
+numToWords, wordsToNum, wordsToCurrency, numberDelimited
